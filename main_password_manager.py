@@ -11,21 +11,18 @@ import keyring
 window = Tk()
 #######################################################################################################
 def old_new():
-
-    #with open('old_pass.txt', 'r') as t:
-        #r = t.readline()
+    r = keyring.get_password("password_manager", "andrei")
     old = old_password_entry.get()
     if old == 'rose' or old==r:
-        print("xxxxxxxxxx")
+        print("Correct")
         new = new_password_entry.get()
         keyring.set_password("password_manager", "andrei", new)
-        #with open('old_pass.txt', 'w') as f:
-            #f.write(new)
+        old_password_entry.delete(0, END)
+        new_password_entry.delete(0, END)
 
 #_ENTER PASSWORD REQUEST WINDOW_#########################################################################
 def enter_password():
-    #with open('old_pass.txt', 'r') as t:
-        #n = t.readline()
+
     window_password = Toplevel(window)
     window_password.title("enter password")
     window_password.geometry("100x100")
@@ -106,7 +103,7 @@ def delay_encrypt():
 
 #_UI SETUP##############################################################################################
 window.title("Password Manager")
-window.config(padx=100, pady=100)
+window.config(padx=30, pady=30)
 
 canvas = Canvas(height=200, width=200)
 logo_img = PhotoImage(file="logo.png")
